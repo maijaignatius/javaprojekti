@@ -1,43 +1,44 @@
 import java.util.Scanner;
 
 public class tietovisa {
+//moi
 	
 	public static void main(String[] args) {
 		
 		Scanner lukija = new Scanner(System.in);
 		String nimimerkki;
 		int pisteet = 0;
-		String[] kysymykset = {"Kuka on Suomen presidentti?\na) Tarja Halonen\nb) Pekka Haavisto\nc) Katja Koskinen\nd) Sauli Niinistˆ", "kysymys2", "kysymys3", "kysymys4", "kysymys5", "kysymys6", "kysymys7"};
+		String[] kysymykset = {"Kuka on Suomen presidentti?\na) Tarja Halonen\nb) Pekka Haavisto\nc) Katja Koskinen\nd) Sauli Niinist√∂", "kysymys2", "kysymys3", "kysymys4", "kysymys5", "kysymys6", "kysymys7"};
 		String[] oikeatvastaukset = {"d", "a", "b", "b", "a", "c", "d"};
 		
-		System.out.println("Tervetuloa pelaamaan tietovisaa!\n\nTietovisan s‰‰nnˆt: \nSinun tulee vastata seitsem‰‰n kysymykseen.\nSaat nelj‰ eri vastausvaihtoehtoa: a),b),c) & d), joista sinun tulee valita oikea vaihtoehto.\n\n-----------------------------------------------------\n\nSyˆt‰ nimimerkkisi, jos olet valmis pelaamaan: ");
+		System.out.println("Tervetuloa pelaamaan tietovisaa!\n\nTietovisan s√§√§nn√∂t: \nSinun tulee vastata seitsem√§√§n kysymykseen.\nSaat nelj√§ eri vastausvaihtoehtoa: a),b),c) & d), joista sinun tulee valita oikea vaihtoehto.\n\n-----------------------------------------------------\n\nSy√∂t√§ nimimerkkisi, jos olet valmis pelaamaan: ");
 		nimimerkki = lukija.nextLine();
 		
-		System.out.println("\nOletko valmis ensimm‰iseen kysymykseen, " + nimimerkki + "?\n\nT‰ss‰ se tulee: ");
+		System.out.println("\nOletko valmis ensimm√§iseen kysymykseen, " + nimimerkki + "?\n\nT√§ss√§ se tulee: ");
 		
 		for (int i = 1; i < kysymykset.length; i++) {
 			for (int j = 0; j < 7; j++) {
 			System.out.println("Kysymys " + i++ +". " + kysymykset[j]);
-			System.out.println("Syˆt‰ vastauksesi: ");
+			System.out.println("Sy√∂t√§ vastauksesi: ");
 			String vastaus = lukija.nextLine();
 			if (oikeatvastaukset[j].equals(vastaus)) {
 				System.out.println("Vastasit oikein. Hienoa, " + nimimerkki + "!");
 				pisteet++;
 				
 			} else 
-				System.out.println("Vastasit v‰‰rin. Parempi onni ensi kerralla, " + nimimerkki + ". Oikea vastaus olisi ollut " + oikeatvastaukset[j] + ".");
+				System.out.println("Vastasit v√§√§rin. Parempi onni ensi kerralla, " + nimimerkki + ". Oikea vastaus olisi ollut " + oikeatvastaukset[j] + ".");
 			}
 		}
 		
-		System.out.println("\n-----------------------------------------------------\n\nTietovisa on p‰‰ttynyt. Sait " + pisteet + "/7 pistett‰.");
+		System.out.println("\n-----------------------------------------------------\n\nTietovisa on p√§√§ttynyt. Sait " + pisteet + "/7 pistett√§.");
 		if (pisteet <= 2) {
-			System.out.println("Heikko suoritus. Paras, ett‰ jatkat harjoittelua.");
+			System.out.println("Heikko suoritus. Paras, ett√§ jatkat harjoittelua.");
 		} else if (pisteet > 2 && pisteet <=5) {
-			System.out.println("P‰rj‰sti kohtalaisesti. Olet varsin n‰pp‰r‰.");
+			System.out.println("P√§rj√§sti kohtalaisesti. Olet varsin n√§pp√§r√§.");
 		} else 
 			System.out.println("Ohhoh! Huippusuoritus.");
 		
-		System.out.println("Kiitos, ett‰ pelasit " + nimimerkki + "!");
+		System.out.println("Kiitos, ett√§ pelasit " + nimimerkki + "!");
 	}
 	
 
