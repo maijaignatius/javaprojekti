@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class tietovisa {
-//moi
 	
 	public static void main(String[] args) {
 		
