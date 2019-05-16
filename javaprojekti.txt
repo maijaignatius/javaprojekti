@@ -1,44 +1,135 @@
 import java.util.Scanner;
 
-public class tietovisa {
-	
-	public static void main(String[] args) {
+public class projekti {
 		
+		public static void main(String[] args) {
+
 		Scanner lukija = new Scanner(System.in);
 		String nimimerkki;
-		int pisteet = 0;
-		String[] kysymykset = {"Kuka on Suomen presidentti?\na) Tarja Halonen\nb) Pekka Haavisto\nc) Katja Koskinen\nd) Sauli Niinistö", "kysymys2", "kysymys3", "kysymys4", "kysymys5", "kysymys6", "kysymys7"};
-		String[] oikeatvastaukset = {"d", "a", "b", "b", "a", "c", "d"};
-		
-		System.out.println("Tervetuloa pelaamaan tietovisaa!\n\nTietovisan säännöt: \nSinun tulee vastata seitsemään kysymykseen.\nSaat neljä eri vastausvaihtoehtoa: a),b),c) & d), joista sinun tulee valita oikea vaihtoehto.\n\n-----------------------------------------------------\n\nSyötä nimimerkkisi, jos olet valmis pelaamaan: ");
-		nimimerkki = lukija.nextLine();
-		
-		System.out.println("\nOletko valmis ensimmäiseen kysymykseen, " + nimimerkki + "?\n\nTässä se tulee: ");
-		
-		for (int i = 1; i < kysymykset.length; i++) {
-			for (int j = 0; j < 7; j++) {
-			System.out.println("Kysymys " + i++ +". " + kysymykset[j]);
-			System.out.println("Syötä vastauksesi: ");
-			String vastaus = lukija.nextLine();
-			if (oikeatvastaukset[j].equals(vastaus)) {
-				System.out.println("Vastasit oikein. Hienoa, " + nimimerkki + "!");
-				pisteet++;
-				
-			} else 
-				System.out.println("Vastasit väärin. Parempi onni ensi kerralla, " + nimimerkki + ". Oikea vastaus olisi ollut " + oikeatvastaukset[j] + ".");
-			}
-		}
-		
-		System.out.println("\n-----------------------------------------------------\n\nTietovisa on päättynyt. Sait " + pisteet + "/7 pistettä.");
-		if (pisteet <= 2) {
-			System.out.println("Heikko suoritus. Paras, että jatkat harjoittelua.");
-		} else if (pisteet > 2 && pisteet <=5) {
-			System.out.println("Pärjästi kohtalaisesti. Olet varsin näppärä.");
-		} else 
-			System.out.println("Ohhoh! Huippusuoritus.");
-		
-		System.out.println("Kiitos, että pelasit " + nimimerkki + "!");
-	}
-	
+		int pisteet1 = 0;
+		int pisteet2 = 0;
+		String uudestaan;
 
+		// "Yleistieto" kategorian kysymykset ja vastausvaihtoehdot omassa taulussa.
+		String[] yleistietoKysymykset = {
+				"Mikä on ainoa ihmisen tekemä rakennelma, joka näkyy Kuuhun?\na) Dubain Burj Khalifa -pilvenpiirtäjä\nb) Golden Gate -silta\nc) Eiffel torni\nd) Kiinan muuri",
+				"Mikä on Puolan lipun toinen väri valkoisen lisäksi?\na) Punainen\nb) Vihreä\nc) Sininen\nd) Keltainen",
+				"Kuka on kirjoittanut suomalaisen kirjallisuuden klassikkoteoksen Rautatie?\na) Eino Leino\nb) Juhani Aho\nc) Mika Waltari\nd) Ilmari Kianto",
+				"Mikä on maailman syvin järvi?\na) Yläjärvi\nb) Baikaljärvi\nc) Kaspianmeri\nd) Victorianjärvi",
+				"Kuinka moni Jumalan antamista Kymmenestä käskystä alkaa sanalla: \"Älä\"?\na) Seitsämän\nb) Viisi\nc) Kahdeksan\nd) Kymmenen",
+				"Kuka oli ensimmäinen nainen avaruudessa?\na) Valetina Komarova\nb) Valetina Korlijova\nc) Valetina Tereshkova\nd) Valentina Volkova",
+				"Missä Yhdysvaltain osavaltiossa sijaitsee Las Vegasin uhkapelikaupunki?\na) Teksasissa\nb) New Yorkissa\nc) Kaliforniassa\nd) Nevadassa" };
+		// "Viihde" kategorian kysymykset ja vastausvaihtoehdot omassa taulussa.		
+		String[] viihdeKysymykset = {
+				"Mitä seuraavista tarvitset osallistuaksesi \"laneihin\"?\na) Tietokoneen\nb) Harvat viikset\nc) Ford Escortin\nd) Energiajuomaa",
+				"Mikä erityistaito suositun Quantum Break -pelin päähahmo Jack Joycella on?\na) Ajatusten lukeminen\nb) Ehtymättömät voimat\nc) Ajan manipuloiminen\nd) Kuolemattomuus",
+				"Mikä suursuosioon noussut televisiosarja perustuu kirjasarjaan Tulen ja jään laulu?\na) Downton Abbey\nb) Mustat Lesket\nc) Vikings\nd) Game of Thrones",
+				"Mikä seuraavista nosti teini-idoli Benjamin Peltosen julkisuuteen?\na) Instagram\nb) The Voice of Finland\nc) Temptation Island Suomi\nd) Big Brother",
+				"5 Kuka seuraavista tähdistä laulaa Angry Birds -elokuvan soundtrackilla?\na) Beyoncé\nb) Demi Lovato\nc) Britney Spears\nd) Lady Gaga",
+				"Mikä oli John Doen oma kuolemansynti elokuvassa Seitsemän?\na) Viha\nb) Kateus\nc) Himo\nd) Laiskuus",
+				"Kenen animaatiohahmon ystäviin kuuluu Patrik Tähtönen?\na) Postimies Paten\nb) Puuha-Peten\nc) Paavo Pesusienen\nd) Tuomas Veturin" };
+		// Yleistieto- ja viihde -kategoria kysymyksien oikeat vastaukset.		
+		String[] yleistietoVastaukset = { "d", "a", "b", "b", "a", "c", "d" };
+		String[] viihdeVastaukset = { "a", "c", "d", "a", "b", "b", "c" };
+
+		// Tulostaa tietovisan säännöt ja kysyy nimimerkin.
+		do {
+			System.out.println(
+					"Tervetuloa pelaamaan tietovisaa!\n\nTietovisan säännöt: \nSinun tulee vastata seitsemään kysymykseen.\nKysymykset liittyvät valitsemaasi kategoriaan.\nSaat neljä eri vastausvaihtoehtoa: a),b),c) & d), joista sinun tulee valita oikea vaihtoehto.\n\n-----------------------------------------------------\n\nSyötä nimimerkkisi, jos olet valmis pelaamaan: ");
+
+			nimimerkki = lukija.nextLine();
+
+			//  Kysyy pelaajalta kategorian.
+			System.out.println(
+					"\nValitse kategoria (1 tai 2), jonka kysymyksiin haluat vastata: \n 1. Yleistieto \n 2. Viihde");
+			int valinta = lukija.nextInt();
+			lukija.nextLine();
+
+			// Jos valinta ei ole sääntöjen mukainen, visa loppuu ja pelin voi aloittaa alusta.
+			if (valinta != 1 && valinta != 2) {
+				System.out.println("Virheellinen valinta.");
+
+			// Jos valinta on 1, ohjelma tulostaa kategorian "Yleistieto" -kysymykset 1-7.
+			} else if (valinta == 1) {
+				System.out.println("\nOletko valmis ensimmäiseen kysymykseen, " + nimimerkki + "?\n\nTässä se tulee: ");
+				for (int i = 1; i < yleistietoKysymykset.length; i++) {
+					for (int j = 0; j < 7; j++) {
+						System.out.println("Kysymys " + i++ + ". " + yleistietoKysymykset[j]);
+						System.out.println("\nSyötä vastauksesi: ");
+						String vastaus = lukija.nextLine();
+						
+						// Jos vastaus on oikein, ohjelma tulostaa että vastaus on oikein.
+						if (yleistietoVastaukset[j].equals(vastaus)) {
+							System.out.println("Vastasit oikein. Hienoa, " + nimimerkki + "!\n");
+							pisteet1++;
+							
+						// Jos vastaus on väärin, ohjelma tulostaa että vastaus on väärin ja kertoo oikean vastauksen.
+						} else
+							System.out.println("Vastasit väärin. Parempi onni ensi kerralla, " + nimimerkki
+									+ ". Oikea vastaus olisi ollut " + yleistietoVastaukset[j] + ".\n");
+					}
+				}
+
+				// Kun kaikki kysymykset on kysytty (ja vastattu) ohjelma tulostaa saatujen pisteiden määrän täysistä pisteistä.
+				System.out.println(
+						"\n-----------------------------------------------------\n\nTietovisa on päättynyt. Sait "
+								+ pisteet1 + "/7 pistettä.");
+
+				// 	Ohjelma antaa palautteen pistemäärän mukaan.				
+				if (pisteet1 <= 2) {
+					System.out.println("Heikko suoritus. Paras, että jatkat harjoittelua.");
+				} else if (pisteet1 > 2 && pisteet1 <= 5) {
+					System.out.println("Pärjästi kohtalaisesti. Olet varsin näppärä.");
+				} else
+					System.out.println("Ohhoh! Huippusuoritus.");
+
+			// Jos valinta on 2 ohjelma tulostaa kategorian "Viihde" -kysymykset 1-7. 
+			} else if (valinta == 2) {
+				System.out.println("\nOletko valmis ensimmäiseen kysymykseen, " + nimimerkki + "?\n\nTässä se tulee: ");
+
+				for (int i = 1; i < viihdeKysymykset.length; i++) {
+					for (int j = 0; j < 7; j++) {
+						System.out.println("Kysymys " + i++ + ". " + viihdeKysymykset[j]);
+						System.out.println("\nSyötä vastauksesi: ");
+						String vastaus = lukija.nextLine();
+						
+						// Jos vastaus on oikein, ohjelma tulostaa että vastaus on oikein.
+						if (viihdeVastaukset[j].equals(vastaus)) {
+							System.out.println("\nVastasit oikein. Hienoa, " + nimimerkki + "!\n");
+							pisteet2++;
+							
+						// Jos vastaus on väärin, ohjelma tulostaa että vastaus on väärin ja kertoo oikean vastauksen.
+						} else
+							System.out.println("\nVastasit väärin. Parempi onni ensi kerralla, " + nimimerkki
+									+ ". Oikea vastaus olisi ollut " + viihdeVastaukset[j] + ".\n");
+					}
+				}
+
+				// Kun kaikki kysymykset on kysytty (ja vastattu) ohjelma tulostaa saatujen pisteiden määrän täysistä pisteistä.
+				System.out.println(
+						"\n-----------------------------------------------------\n\nTietovisa on päättynyt. Sait "
+								+ pisteet2 + "/7 pistettä.");
+
+				// 	Ohjelma antaa palautteen pistemäärän mukaan.	
+				if (pisteet2 <= 2) {
+					System.out.println("Heikko suoritus. Paras, että jatkat harjoittelua.");
+				} else if (pisteet2 > 2 && pisteet2 <= 5) {
+					System.out.println("Pärjästi kohtalaisesti. Olet varsin näppärä.");
+				} else
+					System.out.println("Ohhoh! Huippusuoritus.");
+
+			}
+
+			// Ohjelma kiittää pelaajaa.
+			System.out.println("Kiitos, että pelasit " + nimimerkki + "! :-)");
+
+			// Kysyy halutaanko pelata uudestaan.
+			System.out.println("Jos haluat pelata uudelleen, kirjoita \"Kyllä\"");
+			uudestaan = lukija.nextLine();
+
+		}
+		// Jos kyllä, tietovisa alkaa alusta.
+		while (uudestaan.equalsIgnoreCase("Kyllä"));
+
+	}
 }
